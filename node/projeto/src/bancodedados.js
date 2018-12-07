@@ -6,17 +6,17 @@ const sequence = {
 const produtos = {}
 
 function salvarProduto(produto){
-    if(!produti.id) produto.id = sequence.id
-    produto[produto.id] = produto
+    if(!produto._id) produto._id = sequence._id
+    produtos[produto._id] = produto
     return produto
 }
 
 function getProduto(id){
-    return produto[id] || {}
+    return produtos[id] || {}
 }
 
 function getProdutos(){
     return Object.values(produtos)
 }
 
-module.exports =  {salvarProduto,getProduto,getProdutos}
+module.exports =  { salvarProduto,getProduto,getProdutos }
