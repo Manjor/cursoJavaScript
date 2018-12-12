@@ -9,8 +9,26 @@
     <div id="primeiro">#primeiro</div>
     <div>Segundo</div>
     <div class="terceiro ultimo">.terceiro .ultimo</div>
-    <script>              
-        // ...
+    <script>    
+        //Pega o elemento pelo ID          
+        document.getElementById('primeiro').classList.add('destaque')
+        
+        //Pega uma lista de elementos pelo nome da tag
+        const divs = document.getElementsByTagName('div')
+        //Transforma a lista em array e percorre removendo a classe destaque
+        Array.from(divs).forEach(e => e.classList.remove('destaque'))
+        
+        //Outra maneira de trasnformar em array usando spread
+        const divsArray = [...divs]
+        divsArray.forEach(e => e.classList.add('destaque'))
+        
+        //Pega uma lista de elementos que contenham a classe ultimo
+        const ultimosElementos = document.getElementsByClassName('ultimo')
+        //Percorre a lista e remove a classe 'destaque'
+        for(let e of ultimosElementos){
+            e.classList.remove('destaque')
+        }
+
     </script>
 </body>
 </html>
