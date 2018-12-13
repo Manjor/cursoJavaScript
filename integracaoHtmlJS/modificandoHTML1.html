@@ -9,7 +9,35 @@
 
 <body class='conteudo exercicio'>
     <script>
-        // ...
+        const body = document.querySelector('body')
+
+        //CreateElement cria um elemento html
+        const div1 = document.createElement('div')
+        div1.classList.add('destaque')
+        div1.innerHTML = 'Primeiro'
+
+        const div2 = document.createElement('div')
+        div2.setAttribute('wb-atributo','valor')
+        div2.innerHTML = 'Segundo'
+
+        const p = document.createElement('p')
+        p.innerHTML = 'Terceiro'
+        const div3 = document.createElement('div')
+        div3.appendChild(p)
+
+        //AppendChild adiciona um elemento como filho
+        body.appendChild(div1)
+        body.appendChild(div2)
+        body.appendChild(div3)
+
+        const texto = document.createTextNode('Antes...')
+        div3.insertBefore(texto,div3.childNodes[0])
+        
+        //CloneNode true irá copiar os elementos e os filhso
+        //CloneNode false irá copiar só o elemento
+        const div4 = div3.cloneNode(true)
+        body.appendChild(div4)
+        //body.removeChild(div3)
     </script>
 </body>
 
