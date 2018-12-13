@@ -15,7 +15,29 @@
         <img src='http://files.cod3r.com.br/curso-web/logo-estreita.png' alt='logo'>
     </div>
     <script>
-        // ...
+        //Pega o conteudo da tag
+        const img = document.querySelector('img')
+        //Formas de Pegar os atributos ja determinados de uma tag
+        console.log('getAttribute',img.getAttribute('src'))
+        console.log('src',img.src)
+        console.log('["src"]', img['src'])
+        console.log('alt', img.alt)
+        //Acessar atributos implicítos
+        console.log('Elemento .....................')
+        console.log('Node Type', img.nodeType)
+        console.log('NodeName', img.nodeName)
+        //Retorna um nó que representa o atributo
+        const src = img.getAttributeNode('src')
+        console.log('Atributo "src".........................')
+        console.log('NodeType', src.nodeType)
+        console.log('NodeName', src.nodeName)
+        console.log('NodeValue', src.nodeValue)
+
+        const link = document.querySelector('a')
+        console.log('Elemento a.......................')
+        console.log('href',link.href)
+        console.log('firstChild', link.firstChild.nodeType)
+        link.firstChild.nodeValue = 'Novo Texto'
     </script>
 </body>
 
