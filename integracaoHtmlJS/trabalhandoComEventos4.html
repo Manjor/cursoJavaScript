@@ -31,6 +31,40 @@
         <button wm-submit>Pesquisar</button>
     </form>
     <script>
-        // ...
+        //Interceptar o click do botao
+        /*const botao = document.querySelector('[wm-submit]')
+        botao.onclick = function(e){
+            e.preventDefault()
+            console.log('Clicou')
+            //Pega quem envolve o botao, no caso o formulário
+            const form = e.target.parentNode
+            const formData = new FormData(form)
+            formData.append('ajax',true)
+            console.log(formData.get('q'))
+            console.log(formData.has('hl'))
+
+            for(let dado of formData){
+                console.log(dado)
+            }
+
+        }*/
+
+        //Interceptar o click do botao
+        const form = document.forms[0]
+        form.onsubmit = function(e){
+            e.preventDefault()
+            console.log('Clicou')
+            //Pega quem envolve o botao, no caso o formulário
+            const form = e.target
+            const formData = new FormData(form)
+            formData.append('ajax',true)
+            console.log(formData.get('q'))
+            console.log(formData.has('hl'))
+
+            for(let dado of formData){
+                console.log(dado)
+            }
+            
+        }
     </script>
 </body>
