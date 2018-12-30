@@ -3,13 +3,34 @@ const app = express()
 
 const saudacao = require('./saudacaoMid')
 //Passa a chamada da função
-app.use(saudacao('Manoel'))
+//app.use(saudacao('Manoel'))
 
 //Use atende todos os tipos de requisições, seja ela, GET, POST, PUT...
 /*app.use('/opa',(req,res)=>{
     res.send('<h1>Estou Bem</h1>')
 })*/
 //~Padrão de Cadeia de Responsabilidade
+app.get('/clientes/relatorio',(req,res)=>{
+    //Query usa-se quando for necessário passar como parametro, a chave e o valor
+    //exemplo: url?completo=true&ano=2018
+    res.send(`Cliente relatório: completo ${req.query.completo} ano = ${req.query.ano}`)
+})
+
+app.get('/clientes/:id',(req,res)=>{
+    //request.params.nomeparam pega o parametro enviado na url
+    res.send(`Cliente ${req.params.id} selecionado!`)
+})
+
+app.post('/corpo',(req,res)=>{
+    let corpo = ''
+    req.on('data', function(parte){
+        corpo += parte
+    })
+    req.on('end',function(){
+        res.send(corpo)
+        //res.json(JSON.parse(corpo))
+    })
+})
 
 app.use('/opa',(req,res,next)=>{
     console.log('Antes...')
