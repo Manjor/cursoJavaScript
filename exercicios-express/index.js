@@ -1,9 +1,12 @@
 const express = require('express')
 const app = express()
-
+const bodyParser = require('body-parser')
 const saudacao = require('./saudacaoMid')
 //Passa a chamada da função
 //app.use(saudacao('Manoel'))
+app.use(bodyParser.text())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
 
 //Use atende todos os tipos de requisições, seja ela, GET, POST, PUT...
 /*app.use('/opa',(req,res)=>{
@@ -22,14 +25,15 @@ app.get('/clientes/:id',(req,res)=>{
 })
 
 app.post('/corpo',(req,res)=>{
-    let corpo = ''
+    /*let corpo = ''
     req.on('data', function(parte){
         corpo += parte
     })
     req.on('end',function(){
         res.send(corpo)
         //res.json(JSON.parse(corpo))
-    })
+    })*/
+    res.send(req.body)
 })
 
 app.use('/opa',(req,res,next)=>{
