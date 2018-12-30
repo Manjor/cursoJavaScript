@@ -1,6 +1,10 @@
 const express = require('express')
 const app = express()
 
+const saudacao = require('./saudacaoMid')
+//Passa a chamada da função
+app.use(saudacao('Manoel'))
+
 //Use atende todos os tipos de requisições, seja ela, GET, POST, PUT...
 /*app.use('/opa',(req,res)=>{
     res.send('<h1>Estou Bem</h1>')
@@ -26,7 +30,6 @@ app.get('/opa',(req,res,next)=>{
         status: 200
 
     })
-    
     next()
     //res.json({
     //    nome: 'iPad 32GB',
