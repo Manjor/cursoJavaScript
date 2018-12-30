@@ -5,7 +5,14 @@ const app = express()
 /*app.use('/opa',(req,res)=>{
     res.send('<h1>Estou Bem</h1>')
 })*/
-app.get('/opa',(req,res)=>{
+//~Padrão de Cadeia de Responsabilidade
+
+app.use('/opa',(req,res,next)=>{
+    console.log('Antes...')
+    next()
+})
+app.get('/opa',(req,res,next)=>{
+    console.log('Durante...')
     res.json({
         data:[
             {id: 1, nome: 'Manoel',posicao: 1},
@@ -19,7 +26,8 @@ app.get('/opa',(req,res)=>{
         status: 200
 
     })
-
+    
+    next()
     //res.json({
     //    nome: 'iPad 32GB',
     //    preco: 1988.00,
@@ -29,6 +37,10 @@ app.get('/opa',(req,res)=>{
     //res.send('<h1>Requisição</h1><br><br><h2>Deu Certo</h2>')
 })
 
+
+app.use('/opa',(req,res)=>{
+    console.log('Depois...')
+})
 app.listen(3000,()=>{
     console.log('Backend Executando...')
 })
