@@ -2,6 +2,11 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const saudacao = require('./saudacaoMid')
+const usuarioApi = require('./api/usuario')
+
+app.post('/usuario',usuarioApi.salvar)
+app.get('/usuario',usuarioApi.obter)
+
 //Passa a chamada da função
 //app.use(saudacao('Manoel'))
 app.use(bodyParser.text())
