@@ -1,6 +1,9 @@
 //Cria uma instância do express
 const app = require('express')()
 const consign = require('consign')
+const db = require('./config/db')
+
+app.db = db
 
 //Consig irá carregar para toda a aplicação os midlewares congigurados
 consign()
