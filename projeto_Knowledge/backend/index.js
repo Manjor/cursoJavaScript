@@ -5,6 +5,8 @@ const consign = require('consign')
 //Consig irá carregar para toda a aplicação os midlewares congigurados
 consign()
     .then('./config/middlewares.js')
+    .then('./api')
+    .then('./config/routes.js')
     .into(app)
 
 app.listen(3000,()=>{
