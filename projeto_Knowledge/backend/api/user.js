@@ -16,7 +16,7 @@ module.exports = app => {
         try{
             existsOrError(user.name,'Nome não Informado.')
             existsOrError(user.email,'Email não Informado.')
-            existsOrError(user.email,'Senha não Informado.')
+            existsOrError(user.password,'Senha não Informado.')
             existsOrError(user.confirmPassword,'Confirmação de Senha Inválida.')
             equalsOrError(user.password, user.confirmPassword, 'Senhas não conferem.')
             
@@ -25,14 +25,17 @@ module.exports = app => {
             if(!user.id){
                 notExistsOrError(userFromDB, 'Usuário já Cadastrado.')
             }
-        }catch(msg){
+        }catch(msg)
+        {
             return res.status(400).send(msg)
         }
+
         user.password = encryptPassword(user.password)
+
         delete user.confirmPassword
 
         if(user.id){
-            app.db('user')
+            app.db('users')
                 .update(user)
                 .where({ id: user.id })
                 .then(_ => res.status(204).send())
