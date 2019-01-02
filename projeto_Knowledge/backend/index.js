@@ -8,6 +8,7 @@ app.db = db
 //Consig irá carregar para toda a aplicação os midlewares congigurados
 consign()
     .then('./config/middlewares.js')
+    .then('./api/validation.js')
     .then('./api')
     .then('./config/routes.js')
     .into(app)
