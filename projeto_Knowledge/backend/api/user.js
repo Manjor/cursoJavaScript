@@ -4,11 +4,13 @@ module.exports = app => {
 
     const { existsOrError, notExistsOrError,equalsOrError} = app.api.validation
 
+    //function for encrypt password of the user
     const encryptPassword = password =>{
         const salt = bcrypt.genSaltSync(10)
         return bcrypt.hashSync(password,salt)
     }
-
+    
+    //insert user in database or update 
     const save = async (req,res)=>{
         const user = {...req.body}
         if(req.params.id) user.id = req.params.id
@@ -48,6 +50,7 @@ module.exports = app => {
         }
     }
 
+    //search all user of database
     const get = (req,res) =>{
         app.db('users')
             .select('id','name','email','admin')
@@ -55,5 +58,15 @@ module.exports = app => {
             .catch(err => res.status(500).send(err))
     }
 
-    return { save , get }
+    //search user for ID
+    const getById = (req,res) =>{
+        app.db('users')
+            .select('id','name','email','admin')
+            .where({ id: req.params.id}).first()
+            .then(user => res.json(user))
+            .catch(err => res.status(500).send(err))
+    }
+
+
+    return { save , get, getById }
 }
