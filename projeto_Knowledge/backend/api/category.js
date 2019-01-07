@@ -25,26 +25,24 @@ module.exports = app =>{
         }
     }
 
-    const remove = async (req,res) =>{
-        try{
-            existsOrError(req.params.id,'Codigo da Categoria não informado.')
+    const remove = async (req, res) => {
+        try {
+            existsOrError(req.params.id, 'Código da Categoria não informado.')
 
             const subcategory = await app.db('categories')
                 .where({ parentId: req.params.id })
-
-            notExistsOrError(subcategory,'Categoria Possui subcategorias.')
+            notExistsOrError(subcategory, 'Categoria possui subcategorias.')
 
             const articles = await app.db('articles')
-                .where({ categoryId: req.params.id })
-            notExistsOrError(articles,'Categoria possui artigos relacionados')
+                .where({ categoriesId: req.params.id })
+            notExistsOrError(articles, 'Categoria possui artigos.')
 
             const rowsDeleted = await app.db('categories')
                 .where({ id: req.params.id }).del()
-                
-            existsOrError(rowsDeleted,'Categoria não foi Encontrada.')
+            existsOrError(rowsDeleted, 'Categoria não foi encontrada.')
 
             res.status(204).send()
-        }catch(msg){
+        } catch(msg) {
             res.status(400).send(msg)
         }
     }
@@ -87,5 +85,22 @@ module.exports = app =>{
             .catch(err => res.status(500).send(err))
     }
 
-    return { save, get , getById , remove}
+    const toTree = (categories, tree) =>{
+
+        if(!tree) tree = categories.filter(c => !c.parentId)
+        tree = tree.map(parentNode => {
+            const isChild = node => node.parentId == parentNode.id
+            parentNode.children = toTree(categories, categories.filter(isChild))
+            return parentNode
+        })
+        return tree
+    }
+
+    const getTree = (req,res)=>{
+        app.db('categories')
+            .then(categories => res.json(toTree(withPath(categories))))
+            .catch(err => err.status(500).res.send(err))
+    }
+
+    return { save, get , getById , remove, getTree }
 }
