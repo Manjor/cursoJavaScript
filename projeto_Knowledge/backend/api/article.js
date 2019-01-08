@@ -1,3 +1,4 @@
+const queries = require('./queries')
 module.exports = app =>{
     const {existsOrError, notExistsOrError} = app.api.validation
 
@@ -33,8 +34,12 @@ module.exports = app =>{
         try{
             const rowsDeleted = await app.db('articles')
                 .where({ id : req.params.id }).del()
+            try{
+                existsOrError(rowsDeleted,'Artigo não foi encontrado')
+            }catch(msg){
+                res.status(400).send(msg)
+            }
 
-            existsOrError(rowsDeleted,'Artigo não foi encontrado')
             res.status(204).send()
 
         }catch(msg){
@@ -68,7 +73,22 @@ module.exports = app =>{
                 .catch(err => res.status(500).send(err))
         }
 
-    
-        return { save , remove, get, getById }
+
+        const getByCategory = async (req,res) =>{
+            const categoryId = req.params.id
+            const page = req.query.page || 1
+            const categories = await app.db.raw(queries.categoryWithChildren,categoryId)
+            const ids = categories.rows.map(c => c.id)
+
+            app.db({ a: 'articles', u: 'users'})
+                .select('a.id','a.name','a.description','a.imageUrl',{ author: 'u.name'})
+                .limit(limit).offset(page * limit - limit)
+                .whereRaw('?? = ??', ['u.id','a.userId'])
+                .whereIn('categoryId',ids).orderBy('a.id','desc')
+                .then(articles => res.json(articles))
+                .catch(err => res.status(500).send())
+        }
+
+        return { save , remove, get, getById, getByCategory }
 
 }
