@@ -7,6 +7,7 @@ app.db = db
 
 //Consig irá carregar para toda a aplicação os midlewares congigurados
 consign()
+    .include('./config/passport.js')
     .then('./config/middlewares.js')
     .then('./api/validation.js')
     .then('./api')
