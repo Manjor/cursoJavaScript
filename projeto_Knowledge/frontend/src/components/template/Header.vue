@@ -8,7 +8,7 @@
                 {{title}}
             </router-link>
         </h1>
-        <UserDropdown v-if="!hideUserDropdown"/>
+        <UserDropdown/>
     </header>
 </template>
 
