@@ -9,7 +9,11 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state:{
         //Incia o estado de visibilidade do menu em true
-        isMenuVisible: true
+        isMenuVisible: true,
+        user:{
+            name: 'Usuário Manjor',
+            email: 'manoeltavares.jr@gmail.com'
+        }
     },
     mutations:{
         //Reponsavel por fazer a alternacia do estado do menu
@@ -20,8 +24,6 @@ export default new Vuex.Store({
             }else{
                 state.isMenuVisible = isVisible
             }
-
-            console.log('ToggleMenu = ', state.isMenuVisible)
         }
     }
 })
