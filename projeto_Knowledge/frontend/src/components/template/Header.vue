@@ -19,12 +19,14 @@ export default {
     },
     computed:{
         icon(){
-            return "fa-angle-left"
+            return this.$store.state.isMenuVisible ? "fa-angle-left" : "fa-angle-down"
         }
     },
     methods:{
         toggleMenu(){
-            
+            //$store Acessa a Store compartilhada
+            //Envia a alteração com commit('nome da funçao',parametro)
+            this.$store.commit('toggleMenu')
         }
     }
 }
