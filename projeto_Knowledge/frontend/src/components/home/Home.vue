@@ -3,7 +3,7 @@
         <PageTitle icon="fa fa-home" main="Dashboard" sub="Base de Conhecimento"/>
         <div class="stats">
             <Stat title="Categorias" :value="stat.categories" icon="fa fa-folder" color="#ff4444"/>
-            <Stat title="Artigos" :value="stat.categories" icon="fa fa-folder" color="#ffbb33"/>
+            <Stat title="Artigos" :value="stat.articles" icon="fa fa-folder" color="#ffbb33"/>
             <Stat title="Usuários" :value="stat.users" icon="fa fa-folder" color="#33b5e5"/>
         </div>
     </div>
