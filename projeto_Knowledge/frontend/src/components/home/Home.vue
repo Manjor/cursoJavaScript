@@ -4,7 +4,7 @@
         <div class="stats">
             <Stat title="Categorias" :value="stat.categories" icon="fa fa-folder" color="#ff4444"/>
             <Stat title="Artigos" :value="stat.categories" icon="fa fa-folder" color="#ffbb33"/>
-            <Stat title="Usuários" :value="stat.categories" icon="fa fa-folder" color="#33b5e5"/>
+            <Stat title="Usuários" :value="stat.users" icon="fa fa-folder" color="#33b5e5"/>
         </div>
     </div>
 </template>
@@ -27,6 +27,7 @@ export default {
         getStats(){
             axios.get(`${baseApiUrl}/stats`).then(res =>{
                 this.stat = res.data
+                console.log(this.stat)
             })
         }
     },
