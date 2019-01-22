@@ -27,7 +27,6 @@ export default {
         getStats(){
             axios.get(`${baseApiUrl}/stats`).then(res =>{
                 this.stat = res.data
-                console.log(res.data)
             })
         }
     },
@@ -38,5 +37,9 @@ export default {
 </script>
 
 <style>
-
+    .stats {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
 </style>
