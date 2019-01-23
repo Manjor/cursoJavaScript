@@ -1,5 +1,5 @@
 import Vue from 'vue'
-const baseApiUrl = 'https://knowledge-backend.herokuapp.com/'
+export const baseApiUrl = 'https://knowledge-backend.herokuapp.com'
 export function showError(e){
     if(e && e.response && e.response.data){
         Vue.toasted.global.defaultError({ msg: e.response.data })
