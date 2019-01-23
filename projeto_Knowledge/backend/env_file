@@ -8,3 +8,12 @@ module.exports = {
         password: ''
     }
 }
+authSecret=
+DB_HOST=
+BD_PORT=
+DB_NAME=
+BD_USER=
+DB_PASSWORD=
+MG_USER=
+MG_PASSWORD=
+MG_HOST=
