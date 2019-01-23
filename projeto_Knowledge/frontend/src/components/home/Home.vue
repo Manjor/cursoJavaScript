@@ -25,9 +25,9 @@ export default {
     },
     methods: {
         getStats(){
+            console.log(this.baseApiUrl)
             axios.get(`${baseApiUrl}/stats`).then(res =>{
                 this.stat = res.data
-                console.log(this.stat)
             })
         }
     },

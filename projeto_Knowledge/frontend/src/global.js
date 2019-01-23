@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-export const baseApiUrl = 'https://knowledge-backend.herokuapp.com/'
+export const baseApiUrl = 'https://knowledge-backend.herokuapp.com/';
 
 export function showError(e){
     if(e && e.response && e.response.data){
